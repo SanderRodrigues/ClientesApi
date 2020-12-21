@@ -1,8 +1,8 @@
-﻿using Application.Commands;
+﻿using Commands.Commands;
 using AutoMapper;
 using Domain.Entitys.Cliente;
 
-namespace Application.Mapper
+namespace Commands.Mapper
 {
     public class ApiToLibraryMapper: Profile
     {

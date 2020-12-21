@@ -11,7 +11,7 @@ namespace ClientesApi.Controllers.Base
         {
             if (result.Success)
             {
-                return Created(result.ResourceId, null);
+                return Created("", new { result.ResourceId });
             }
             else
             {

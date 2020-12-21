@@ -1,7 +1,7 @@
 ﻿using CrossCutting.Command;
 using Flunt.Validations;
 
-namespace Application.Commands
+namespace Commands.Commands
 {
     public class CriarClienteCommand: Command
     {

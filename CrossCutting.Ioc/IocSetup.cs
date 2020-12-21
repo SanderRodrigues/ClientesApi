@@ -20,8 +20,8 @@ namespace CrossCuttingIoc
 
         private static void AdicionaUtilitarios(IServiceCollection services)
         {
-            services.AddAutoMapper(AppDomain.CurrentDomain.Load("Infrastructure"), AppDomain.CurrentDomain.Load("Application"));
-            services.AddMediatR(AppDomain.CurrentDomain.Load("Application"));
+            services.AddAutoMapper(AppDomain.CurrentDomain.Load("Infrastructure"), AppDomain.CurrentDomain.Load("Commands"));
+            services.AddMediatR(AppDomain.CurrentDomain.Load("Commands"), AppDomain.CurrentDomain.Load("Queries"));
         }
 
         private static void AdicionarDB(IServiceCollection services)
@@ -31,6 +31,8 @@ namespace CrossCuttingIoc
             var sp = services.BuildServiceProvider();
             var sqlDbContext = sp.GetRequiredService<SqlDbContext>();
             sqlDbContext.Database.EnsureCreated();
+
+            services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
         }
 
         private static void AdicionarInjecoes(IServiceCollection services)

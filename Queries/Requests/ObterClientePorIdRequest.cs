@@ -1,8 +1,8 @@
 ﻿using System;
-using Application.Dto;
 using MediatR;
+using Queries.Dto;
 
-namespace Application.Querys
+namespace Queries.Requests
 {
     public class ObterClientePorIdRequest: IRequest<ClienteDto>
     {

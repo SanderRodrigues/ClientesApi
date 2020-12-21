@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Application.Commands;
+using Commands.Commands;
 using AutoMapper;
 using CrossCutting.Command;
 using Domain.Entitys.Cliente;
 
-namespace Application.CommandHandlers
+namespace Commands.CommandHandlers
 {
     public class CriarClienteHandler: CommandHandler<CriarClienteCommand>
     {

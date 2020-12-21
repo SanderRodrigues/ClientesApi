@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using ClientesApi;
+using Infrastructure.CoreServices.DataAccess;
+using Infrastructure.DataModel.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 
 namespace FuncionalTests
 {
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Startup>
+    public class CommandsWebApplicationFactory<TStartup> : WebApplicationFactory<Startup>
     {
         public static List<KeyValuePair<string, string>> ParametrosConfig = new List<KeyValuePair<string, string>>()
             {
@@ -23,9 +26,16 @@ namespace FuncionalTests
             .ConfigureAppConfiguration(a => a.AddInMemoryCollection(ParametrosConfig))
             .ConfigureServices(services =>
             {
-                var serviceProvider = new ServiceCollection()
-                    .AddEntityFrameworkInMemoryDatabase()
-                    .BuildServiceProvider();
+                var descriptor = services.SingleOrDefault(
+                d => d.ServiceType ==
+                    typeof(DbContextOptions<SqlDbContext>));
+
+                services.Remove(descriptor);
+
+                services.AddDbContext<SqlDbContext>(options =>
+                {
+                    options.UseInMemoryDatabase("InMemoryDbForTesting");
+                });
 
                 InjecaoDependencias(services);
 
@@ -35,11 +45,13 @@ namespace FuncionalTests
                     var scopedServices = scope.ServiceProvider;
 
                     var logger = scopedServices
-                        .GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
+                        .GetRequiredService<ILogger<CommandsWebApplicationFactory<TStartup>>>();
 
                     try
                     {
-                        // Seed the database with test data.
+                        var context = scopedServices.GetRequiredService<SqlDbContext>();
+                        context.Clientes.Add(new ClienteDbModel { Id = Guid.NewGuid(), Nome = "Guilherme", SobreNome="Morais", Email = "guilherme.morais@teste.com" });
+                        context.SaveChanges();
                     }
                     catch (Exception ex)
                     {
@@ -48,7 +60,6 @@ namespace FuncionalTests
                     }
                 }
             });
-            
         }
 
         private static void InjecaoDependencias(IServiceCollection services)
