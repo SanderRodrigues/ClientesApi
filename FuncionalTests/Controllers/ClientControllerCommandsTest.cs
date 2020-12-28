@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ClientesApi;
 using Commands.Commands;
 using FluentAssertions;
+using FuncionalTests.Util;
 using Xunit;
 
 namespace FuncionalTests.Controllers
@@ -34,11 +35,6 @@ namespace FuncionalTests.Controllers
             stringResponse.Should().NotBeNullOrEmpty();
             objResponse.Should().NotBeNull();
             objResponse.ResourceId.Should().NotBeEmpty();
-        }
-
-        private class CreatedResponse
-        {
-            public Guid ResourceId { get; set; }
         }
     }
 }

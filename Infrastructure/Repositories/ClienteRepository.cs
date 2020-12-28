@@ -31,8 +31,6 @@ namespace Infrastructure.Repositories
         {
             ClienteDbModel cliente = _mapper.Map<ClienteDbModel>(entidade);
 
-            cliente.Id = Guid.NewGuid();
-
             _dbContext.Clientes.Add(cliente);
             _ = await _dbContext.SaveChangesAsync();
             return _mapper.Map<Cliente>(cliente);
@@ -46,14 +44,11 @@ namespace Infrastructure.Repositories
             return _mapper.Map<Cliente>(cliente);
         }
 
-        public async Task<IEnumerable<Cliente>> ListarClientesAsync() 
+        public async Task UpdateAsync(Cliente entidade)
         {
-            return await _dbContext.Clientes.Select(a => _mapper.Map<Cliente>(a)).ToListAsync();
-        }
-
-        public Task UpdateAsync(Cliente entidade)
-        {
-            throw new NotImplementedException();
+            var clientedb = _dbContext.Clientes.FirstOrDefault(a => a.Id == entidade.Id);
+            _dbContext.Clientes.Update(_mapper.Map(entidade, clientedb));
+            _ = await _dbContext.SaveChangesAsync();
         }
     }
 }

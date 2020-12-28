@@ -15,6 +15,7 @@ namespace Infrastructure.CoreServices.DataAccess
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ClienteDbModel>().ToTable("Cliente").HasKey(a => a.Id);
+            modelBuilder.Entity<ClienteDbModel>().Property(a => a.Nome).HasMaxLength(10);
         }
     }
 }

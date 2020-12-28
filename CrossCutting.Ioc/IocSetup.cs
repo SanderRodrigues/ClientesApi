@@ -2,6 +2,7 @@
 using AutoMapper;
 using Domain.Entitys.Cliente;
 using Infrastructure.CoreServices.DataAccess;
+using Infrastructure.CoreServices.EmailSend;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,7 @@ namespace CrossCuttingIoc
         private static void AdicionarInjecoes(IServiceCollection services)
         {
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddSingleton<IEnvioEmailSevice, EnvioEmailSevice>();
         }
     }
 }

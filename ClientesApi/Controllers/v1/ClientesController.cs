@@ -31,7 +31,7 @@ namespace ClientesApi.Controllers.v1
             return result;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ClienteDto> GetbyIdAsync(Guid id, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new ObterClientePorIdRequest() { Id = id }, cancellationToken);

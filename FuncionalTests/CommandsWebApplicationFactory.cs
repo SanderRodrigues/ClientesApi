@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ClientesApi;
 using Infrastructure.CoreServices.DataAccess;
+using Infrastructure.CoreServices.EmailSend;
 using Infrastructure.DataModel.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace FuncionalTests
 {
@@ -64,6 +66,7 @@ namespace FuncionalTests
 
         private static void InjecaoDependencias(IServiceCollection services)
         {
+            services.AddSingleton(new Mock<IEnvioEmailSevice>().Object);
         }
     }
 }

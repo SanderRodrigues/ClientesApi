@@ -25,7 +25,7 @@ namespace FuncionalTests.Controllers
             response.EnsureSuccessStatusCode();
 
             var stringResponse = await response.Content.ReadAsStringAsync();
-            var objResponse = JsonSerializer.Deserialize<IEnumerable<ClienteDto>>(stringResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true});
+            var objResponse = JsonSerializer.Deserialize<IEnumerable<ClienteDto>>(stringResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             stringResponse.Should().NotBeNullOrEmpty();
             objResponse.Should().NotBeNull();

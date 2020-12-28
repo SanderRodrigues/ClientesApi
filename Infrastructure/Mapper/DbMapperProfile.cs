@@ -8,7 +8,7 @@ namespace Infrastructure.Mapper
     {
         public DbMapperProfile()
         {
-            CreateMap<ClienteDbModel, Cliente>().ReverseMap();
+            CreateMap<ClienteDbModel, Cliente>().ConstructUsing(a => new Cliente(a.Id, a.Nome, a.SobreNome, a.Email)).ReverseMap();
         }
     }
 }
