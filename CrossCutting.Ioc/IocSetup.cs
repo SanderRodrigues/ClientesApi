@@ -31,6 +31,7 @@ namespace CrossCuttingIoc
             services.AddDatabaseDeveloperPageExceptionFilter();
             var sp = services.BuildServiceProvider();
             var sqlDbContext = sp.GetRequiredService<SqlDbContext>();
+            //sqlDbContext.Database.EnsureDeleted();
             sqlDbContext.Database.EnsureCreated();
 
             services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();

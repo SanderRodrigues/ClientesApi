@@ -32,7 +32,9 @@ namespace FuncionalTests.Controllers
                     services.AddSingleton(ConfiguraMockEmailApiError().Object);
                 });
             }).CreateClient();
+
             _httpClient.Timeout = TimeSpan.FromMinutes(5);
+
             _factory = factory;
         }
 

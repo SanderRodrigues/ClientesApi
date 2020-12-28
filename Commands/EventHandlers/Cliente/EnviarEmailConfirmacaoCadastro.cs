@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.Entitys.Cliente;
@@ -7,7 +6,6 @@ using Domain.Events;
 using Infrastructure.CoreServices.EmailSend;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Domain.Entitys;
 
 namespace Commands.EventHandlers.Cliente
 {

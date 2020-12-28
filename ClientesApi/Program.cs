@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ClientesApi
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

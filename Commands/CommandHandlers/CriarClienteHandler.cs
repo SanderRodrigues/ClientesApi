@@ -28,7 +28,7 @@ namespace Commands.CommandHandlers
             {
                 var cliente = _mapper.Map<Cliente>(request);
                 _ = await _clienteRepository.InsertAsync(cliente, cancellationToken);
-                cliente.RaiseEvents(_mediator);
+                await cliente.RaiseEventsAsync(_mediator);
                 return CommandResult.Ok(cliente.Id.ToString(), CommandResultResourceAction.Created);
             }
             catch (Exception ex)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Flunt.Notifications;
 using MediatR;
 
@@ -23,11 +24,11 @@ namespace CrossCutting.Domain
             _events.Clear();
         }
 
-        public void RaiseEvents(IMediator bus, bool clearEvents = false)
+        public async Task RaiseEventsAsync(IMediator mediator, bool clearEvents = false)
         {
             foreach (var ev in _events)
             {
-                bus.Publish(ev);
+                await mediator.Publish(ev);
             }
 
             if (clearEvents)
