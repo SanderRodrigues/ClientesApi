@@ -21,15 +21,17 @@ namespace FuncionalTests.Controllers
         [Fact]
         public async Task GetAllClientsSucess()
         {
-            var response = await _client.GetAsync("v1/Clientes/GetAll");
+            ClienteDto clienteDto = new ClienteDto() { Id = "80B38FC1-A6A2-4AC5-8B5C-749E4C262FF7", Nome = "Guilherme", SobreNome= "Morais", Email = "guilherme.morais@teste.com" };
+        var response = await _client.GetAsync("v1/Clientes/GetAll");
             response.EnsureSuccessStatusCode();
 
             var stringResponse = await response.Content.ReadAsStringAsync();
-            var objResponse = JsonSerializer.Deserialize<IEnumerable<ClienteDto>>(stringResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            var objResponse = JsonSerializer.Deserialize<List<ClienteDto>>(stringResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             stringResponse.Should().NotBeNullOrEmpty();
             objResponse.Should().NotBeNull();
             objResponse.Should().HaveCount(2);
+            objResponse.Should().Contain(clienteDto);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Queries.QueryHandlers
 {
     public class ListarClientesTodosRequestHandler : BaseQueryHandler,  IRequestHandler<ListarClientesTodosRequest, IEnumerable<ClienteDto>>
     {
-        const string sql = "SELECT Id, Nome + ' ' + SobreNome as NomeCompleto, Email FROM Cliente";
+        const string sql = "SELECT Id, Nome, SobreNome, Email FROM Cliente";
 
         public ListarClientesTodosRequestHandler(IDbConnectionFactory dbConnectionFactory) :base(dbConnectionFactory)
         {

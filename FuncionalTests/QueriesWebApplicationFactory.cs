@@ -55,8 +55,8 @@ namespace FuncionalTests
                     {
                         var context = scopedServices.GetRequiredService<SqlDbContext>();
                         context.Database.EnsureCreated();
-                        context.Clientes.Add(new ClienteDbModel { Id = Guid.NewGuid(), Nome = "Guilherme", SobreNome="Morais", Email = "guilherme.morais@teste.com" });
-                        context.Clientes.Add(new ClienteDbModel { Id = Guid.NewGuid(), Nome = "Ana", SobreNome = "Maria", Email = "ana.maria@teste.com" });
+                        context.Clientes.Add(new ClienteDbModel { Id = Guid.Parse("80b38fc1-a6a2-4ac5-8b5c-749e4c262ff7"), Nome = "Guilherme", SobreNome="Morais", Email = "guilherme.morais@teste.com" });
+                        context.Clientes.Add(new ClienteDbModel { Id = Guid.Parse("93103eca-f133-4263-b751-7c739b7a4ec6"), Nome = "Ana", SobreNome = "Maria", Email = "ana.maria@teste.com" });
                         context.SaveChanges();
                     }
                     catch (Exception ex)

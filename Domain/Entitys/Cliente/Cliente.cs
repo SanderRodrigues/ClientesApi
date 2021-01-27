@@ -4,7 +4,7 @@ using Domain.Events;
 
 namespace Domain.Entitys.Cliente
 {
-    public class Cliente: Entity
+    public class Cliente: Entity, IAggregateRoot
     {
         public string Nome { get; private set; }
         public string SobreNome { get; private set; }
