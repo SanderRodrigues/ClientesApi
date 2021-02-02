@@ -22,7 +22,7 @@ namespace FuncionalTests.Controllers
         public async Task GetAllClientsSucess()
         {
             ClienteDto clienteDto = new ClienteDto() { Id = "80B38FC1-A6A2-4AC5-8B5C-749E4C262FF7", Nome = "Guilherme", SobreNome= "Morais", Email = "guilherme.morais@teste.com" };
-        var response = await _client.GetAsync("v1/Clientes/GetAll");
+            var response = await _client.GetAsync("v1/Clientes/GetAll");
             response.EnsureSuccessStatusCode();
 
             var stringResponse = await response.Content.ReadAsStringAsync();
